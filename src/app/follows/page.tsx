@@ -131,7 +131,7 @@ export default function FollowsPage() {
         </div>
         {searchQuery && (
           <p className="mt-2 text-sm text-gray-600">
-            พบ {items.length} รายการที่ตรงกับการค้นหา "{searchQuery}"
+            พบ {items.length} รายการที่ตรงกับการค้นหา &quot;{searchQuery}&quot;
           </p>
         )}
       </div>

@@ -70,7 +70,7 @@ export default function FollowsPage() {
 
   return (
     <div className="p-6 md:p-8 min-h-screen bg-white">
-      <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-black">ติดตามสถานะ (Follows)</h1>
+      <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-black">รายการของผู้ทำสัญญาทั้งหมด</h1>
 
       <div className="flex items-center gap-2 mb-6">
         <button

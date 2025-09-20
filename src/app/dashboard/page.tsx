@@ -60,7 +60,10 @@ export default function DashboardPage() {
   ];
 
   // แผนภูมิเส้นสำหรับแนวโน้มกำไร
-  const lineXAxis = [{ data: months }];
+  const lineXAxis = [{ 
+    data: [0, 1, 2, 3, 4, 5],
+    valueFormatter: (value: number) => months[value] || ''
+  }];
   const lineSeries = [
     { 
       id: "profitTrend", 

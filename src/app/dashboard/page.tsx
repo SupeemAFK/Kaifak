@@ -6,20 +6,10 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 export default function DashboardPage() {
-  // ฟังก์ชันสำหรับจัดรูปแบบตัวเลขให้เป็น M notation
-  const formatNumber = (value: number) => {
-    if (value >= 1000000) {
-      return `${(value / 1000000).toFixed(1)}M`;
-    } else if (value >= 1000) {
-      return `${(value / 1000).toFixed(1)}K`;
-    }
-    return value.toString();
-  };
-
   // ข้อมูลทางการเงินตัวอย่างสำหรับ 6 เดือนที่ผ่านมา
   const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย."];
-  const incomeData = [1.2, 1.5, 1.8, 2.2, 2.5, 2.8]; // ในหน่วยล้านบาท
-  const expenseData = [0.8, 0.95, 1.1, 1.3, 1.5, 1.7]; // ในหน่วยล้านบาท
+  const incomeData = [1200000, 1500000, 1800000, 2200000, 2500000, 2800000];
+  const expenseData = [800000, 950000, 1100000, 1300000, 1500000, 1700000];
   const profitData = incomeData.map((income, index) => income - expenseData[index]);
 
   const barXAxis = [
@@ -59,9 +49,9 @@ export default function DashboardPage() {
   const pieSeries = [
     {
       data: [
-        { id: 0, value: totalIncome, label: `รายได้รวม ${totalIncome.toFixed(1)}M`, color: "#10b981" },
-        { id: 1, value: totalExpenses, label: `ค่าใช้จ่ายรวม ${totalExpenses.toFixed(1)}M`, color: "#ef4444" },
-        { id: 2, value: totalProfit, label: `กำไรรวม ${totalProfit.toFixed(1)}M`, color: "#3b82f6" },
+        { id: 0, value: totalIncome, label: "รายได้รวม", color: "#10b981" },
+        { id: 1, value: totalExpenses, label: "ค่าใช้จ่ายรวม", color: "#ef4444" },
+        { id: 2, value: totalProfit, label: "กำไรรวม", color: "#3b82f6" },
       ],
       innerRadius: 30,
       paddingAngle: 2,
@@ -102,7 +92,7 @@ export default function DashboardPage() {
                   height={400}
                   yAxis={[{
                     scaleType: 'linear',
-                    valueFormatter: (value) => `${value}M บาท`
+                    valueFormatter: (value) => `${value.toLocaleString()} บาท`
                   }]}
                 />
               </div>
@@ -127,7 +117,7 @@ export default function DashboardPage() {
                   height={400}
                   yAxis={[{
                     scaleType: 'linear',
-                    valueFormatter: (value) => `${value}M บาท`
+                    valueFormatter: (value) => `${value.toLocaleString()} บาท`
                   }]}
                 />
               </div>
@@ -141,7 +131,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">รายได้รวม</p>
-                <p className="text-2xl font-bold text-green-600">{totalIncome.toFixed(1)}M บาท</p>
+                <p className="text-2xl font-bold text-green-600">{totalIncome.toLocaleString()} บาท</p>
               </div>
             </div>
           </div>
@@ -150,7 +140,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">ค่าใช้จ่ายรวม</p>
-                <p className="text-2xl font-bold text-red-600">{totalExpenses.toFixed(1)}M บาท</p>
+                <p className="text-2xl font-bold text-red-600">{totalExpenses.toLocaleString()} บาท</p>
               </div>
             </div>
           </div>
@@ -159,7 +149,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">กำไรรวม</p>
-                <p className="text-2xl font-bold text-blue-600">{totalProfit.toFixed(1)}M บาท</p>
+                <p className="text-2xl font-bold text-blue-600">{totalProfit.toLocaleString()} บาท</p>
               </div>
             </div>
           </div>

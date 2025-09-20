@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 
 type ContractType = "kaifak" | "jamnong";
 
@@ -61,21 +61,22 @@ const MOCK_ITEMS: FollowItem[] = [
 ];
 
 export default function FollowsPage() {
-  const [filter, setFilter] = React.useState<ContractType | "all">("all");
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [items, setItems] = useState<FollowItem[]>(MOCK_ITEMS);
+  const [filter, setFilter] = useState<ContractType | "all">("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredItems = React.useMemo(() => {
-    let items = MOCK_ITEMS;
+  useEffect(() => {
+    let filteredItems = MOCK_ITEMS;
     
     // Filter by contract type
     if (filter !== "all") {
-      items = items.filter((i) => i.type === filter);
+      filteredItems = filteredItems.filter((i) => i.type === filter);
     }
     
     // Filter by search query
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
-      items = items.filter((item) => 
+      filteredItems = filteredItems.filter((item) => 
         item.name.toLowerCase().includes(query) ||
         item.deedNo.toLowerCase().includes(query) ||
         item.amphoe.toLowerCase().includes(query) ||
@@ -85,7 +86,7 @@ export default function FollowsPage() {
       );
     }
     
-    return items;
+    setItems(filteredItems);
   }, [filter, searchQuery]);
 
   return (
@@ -130,7 +131,7 @@ export default function FollowsPage() {
         </div>
         {searchQuery && (
           <p className="mt-2 text-sm text-gray-600">
-            พบ {filteredItems.length} รายการที่ตรงกับการค้นหา "{searchQuery}"
+            พบ {items.length} รายการที่ตรงกับการค้นหา "{searchQuery}"
           </p>
         )}
       </div>
@@ -168,7 +169,7 @@ export default function FollowsPage() {
         </button>
       </div>
 
-      {filteredItems.length === 0 ? (
+      {items.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-400 mb-4">
             <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +196,7 @@ export default function FollowsPage() {
         </div>
       ) : (
         <ul className="space-y-4">
-          {filteredItems.map((item) => (
+          {items.map((item) => (
             <li key={item.id} className="rounded-lg border border-gray-200 bg-white p-4">
               <div className="flex flex-col gap-1 text-sm text-gray-800">
                 <div>
